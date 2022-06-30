@@ -1,0 +1,19 @@
+span{
+    color:black;
+}
+.product{
+    background-color:grey;
+    padding:.5rem;
+    border-radius:.5rem;
+    width:70%;
+    margin:.5rem auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between
+}
+p{
+    color:white;
+}
+.product img{
+    width:100px
+}
