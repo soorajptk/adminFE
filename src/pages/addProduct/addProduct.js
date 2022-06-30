@@ -39,6 +39,7 @@ function AddProduct() {
               <option value="3">Home</option>
               <option value="4">Grocery</option>
               </select>
+              
             </div>
             <div>
             <label htmlFor='price'>price</label>
