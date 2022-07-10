@@ -17,3 +17,11 @@ p{
 .product img{
     width:100px
 }
+.updateProduct{
+    text-decoration: none;
+    background-color: rgb(50, 61, 61);
+    color: white;
+    padding: .2rem;
+    border-radius: .2rem;
+
+}

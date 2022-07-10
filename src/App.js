@@ -4,7 +4,9 @@ import { Switch, Route } from "react-router-dom";
 import PrivateRoute from "./auth";
 import {useDispatch} from 'react-redux'
 import Home from './pages/home/Home'
-import AddProduct from './pages/addProduct/addProduct'
+import AddProduct from './pages/addProduct/addProduct';
+import UpdateProduct from './pages/updateProduct/UpdateProduct'
+import Offer from './pages/offer/Offer'
 import Login from './pages/login/login'
 import {FetchProduct} from './apiCalls/apiCalls'
 function App() {
@@ -23,6 +25,12 @@ function App() {
         </PrivateRoute>
         <PrivateRoute path={"/addproduct"}>
           <AddProduct/>
+        </PrivateRoute>
+        <PrivateRoute path={"/updateproduct/:id"}>
+          <UpdateProduct/>
+        </PrivateRoute>
+        <PrivateRoute path={"/addoffer/:id"}>
+          <Offer/>
         </PrivateRoute>
           </Switch>
 

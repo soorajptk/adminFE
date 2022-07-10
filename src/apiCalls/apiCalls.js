@@ -1,8 +1,9 @@
 import axios from 'axios'
 import {Authaction} from '../redux/auth/AuthAction'
 import {fetchProduct}from '../redux/product/ProductAction'
+import {fetchSingleProduct} from '../redux/product/ProductAction'
 
-axios.interceptors.request.use((request:any)=>{
+axios.interceptors.request.use((request)=>{
     const userLocal=localStorage.getItem('admin')
     if(userLocal){
       const admin=JSON.parse(userLocal)
@@ -50,11 +51,43 @@ export const updateStock=(data)=>{
 
 
 export const addProduct=(data)=>{
+    console.log(data);
     return async(dispatch)=>{
         try {
             const response= await axios({method:"post",url:"http://localhost:5000/api/v1/admin/addproduct",data})
             console.log(response);
             await dispatch(FetchProduct())
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const SingleProduct=(Product_id)=>{
+    return async(dispatch)=>{
+        try {
+            const response= await axios({method:"get",url:`http://localhost:5000/api/v1/admin/singleproduct/${Product_id}`})
+            await dispatch(fetchSingleProduct(response.data.response[0]))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const updateProduct=(data)=>{
+    return async(dispatch)=>{
+        try {
+            console.log(data);
+           await axios({method:"post",url:`http://localhost:5000/api/v1/admin/updateproduct`,data})
+          await dispatch(FetchProduct())
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+export const addoffer=(data)=>{
+    return async(dispatch)=>{
+        try {
+           await axios({method:"post",url:`http://localhost:5000/api/v1/admin/offerproduct`,data})
+          await dispatch(FetchProduct())
         } catch (error) {
             console.log(error);
         }

@@ -47,3 +47,20 @@
 display:flex;
 flex-direction:column;
 }
+.selectop{
+}
+.offerpage{
+  background-color: lightblue;
+  border-radius: .2rem;
+  width:20%;
+  margin: 5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.offerpage input{
+  margin: .3rem;
+  width: 100%;
+}

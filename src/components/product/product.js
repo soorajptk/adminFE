@@ -1,20 +1,7 @@
 import React,{useState} from 'react'
 import './product.css'
-import {useDispatch}from 'react-redux'
-import {updateStock} from '../../apiCalls/apiCalls'
+import {Link} from 'react-router-dom'
 function Product({product_name,category_name,category_id,price,product_id,stock,stock_qty}) {
-    const dispatch=useDispatch()
-    const [stockIn,SetstockIn]=useState(false)
-   const [qty,SetQty]=useState({qty:0})
-    
-    const handleSubmit=(e,product_id)=>{
-        e.preventDefault()
-        if(qty.qty===0){
-          return  alert("empty field")
-        }console.log(qty);
-        dispatch(updateStock({product_id,qty:qty.qty}))
-        SetstockIn(false)
-    }
         
     return (
     <div className='product'>
@@ -23,12 +10,9 @@ function Product({product_name,category_name,category_id,price,product_id,stock,
         <p><span>category: </span>{category_name}</p>
         <p><span>price: </span>{price}</p>
         <p><span>stockRemains: </span>{stock}</p>
-        {!stockIn && <p><span>stock: </span>{stock_qty}</p>}
-        {stockIn && <form onSubmit={(e)=>handleSubmit(e,product_id)}>
-            <input onChange={(e)=>SetQty({qty:e.target.value})} placeholder='stock'/>
-            <button>update</button>
-            </form>}
-        {!stockIn&&<button onClick={()=>SetstockIn(true)}>changeStock</button>}
+        <p><span>stock: </span>{stock_qty}</p>
+        <Link className='updateProduct' to={`/updateproduct/${product_id}`}>updateProduct</Link>
+        <Link className='updateProduct' to={`/addoffer/${product_id}`}>Add Offer</Link>
     </div>
   )
 }

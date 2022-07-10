@@ -1,25 +1,46 @@
 import React,{useState} from 'react'
+import axios from 'axios'
 import {useDispatch} from 'react-redux'
 import {addProduct} from '../../apiCalls/apiCalls'
 import {useHistory} from 'react-router-dom'
 function AddProduct() {
-    const [product,setProduct]=useState({product_name:"",decscription:"",category_id:"",price:"",stock:""})
+    const [product,setProduct]=useState({product_name:"",decscription:"",category_id:"",price:"",stock:"",image:""})
     const dispatch=useDispatch()
     const history=useHistory()
 
     const handleChange=(e)=>{
+
         const {name,value}=e.target
         setProduct({...product,[name]:value})
     }
+    const handleUpload=async(e)=>{
+      setProduct({...product,image:e.target.files[0]})
+      // try{
+      //   console.log(data);
+      //     const response=await axios.post('http://localhost:5000/api/v1/admin/uploadimage',data)
+      //     console.log(response.data.image.src);
+      //     setProduct({...product,image:response.data.image.src})
+      // }catch(err){
+  
+      // }
+      }
+  console.log(product);
+  
     const handleSubmit=(e)=>{
         e.preventDefault()
-        dispatch(addProduct(product))
+        let data=new FormData()
+        Object.keys(product).forEach(item=>{
+          data.append(item,product[item])
+        })
+      
+        dispatch(addProduct(data))
         alert('successfully added')
         history.push('/')
     }
     return (
     <div>
         <form className='addproduct' onSubmit={(e)=>handleSubmit(e)}>
+          <input type='file' onChange={handleUpload}/>
             <div>
             <label htmlFor='product_name'>Product Name</label>
             <input id='product_name' value={product.product_name} name='product_name' onChange={(e)=>handleChange(e)}/>
